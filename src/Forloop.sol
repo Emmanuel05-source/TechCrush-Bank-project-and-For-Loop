@@ -14,21 +14,11 @@ contract ForLoop {
     Account[] public accounts;
 
     // Function to add multiple accounts using a for loop
-    function addMultipleAccounts(
-        string[] memory names,
-        address[] memory addresses
-    ) public {
+    function addMultipleAccounts(string[] memory names, address[] memory addresses) public {
         require(names.length == addresses.length, "Length mismatch");
 
         for (uint256 i = 0; i < names.length; i++) {
-            accounts.push(
-                Account({
-                    name: names[i],
-                    accountBalance: 0,
-                    accountAddress: addresses[i],
-                    isActive: true
-                })
-            );
+            accounts.push(Account({name: names[i], accountBalance: 0, accountAddress: addresses[i], isActive: true}));
         }
     }
 

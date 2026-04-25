@@ -37,12 +37,8 @@ contract TechCrushBank {
 
         totalFee += msg.value;
 
-        accounts[msg.sender] = Account({
-            name: _name,
-            accountBalance: 0,
-            accountAddress: msg.sender,
-            accountStatus: true
-        });
+        accounts[msg.sender] =
+            Account({name: _name, accountBalance: 0, accountAddress: msg.sender, accountStatus: true});
     }
 
     // DEPOSIT
@@ -62,7 +58,7 @@ contract TechCrushBank {
         accounts[msg.sender].accountBalance -= amount;
         totalAmountInBank -= amount;
 
-        (bool ok, ) = payable(msg.sender).call{value: amount}("");
+        (bool ok,) = payable(msg.sender).call{value: amount}("");
         require(ok, "Withdraw failed");
     }
 

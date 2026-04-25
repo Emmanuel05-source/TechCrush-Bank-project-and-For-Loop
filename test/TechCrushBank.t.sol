@@ -23,9 +23,7 @@ contract TestTechCrushBank is Test {
         vm.prank(Emmanuel);
         bank.createAccount{value: 1e16}("Emma");
 
-        (string memory name, , address addr, bool active) = bank.accounts(
-            Emmanuel
-        );
+        (string memory name,, address addr, bool active) = bank.accounts(Emmanuel);
 
         assertEq(name, "Emma");
         assertEq(addr, Emmanuel);
@@ -57,7 +55,7 @@ contract TestTechCrushBank is Test {
         bank.createAccount{value: 1e16}("Emma");
         bank.userDeposit{value: 1 ether}();
 
-        (, uint bal, , ) = bank.accounts(Emmanuel);
+        (, uint256 bal,,) = bank.accounts(Emmanuel);
         assertEq(bal, 1 ether);
     }
 
@@ -72,7 +70,7 @@ contract TestTechCrushBank is Test {
 
         bank.userWithdraw(0.5 ether);
 
-        (, uint bal, , ) = bank.accounts(Emmanuel);
+        (, uint256 bal,,) = bank.accounts(Emmanuel);
         assertEq(bal, 0.5 ether);
     }
 
@@ -88,7 +86,7 @@ contract TestTechCrushBank is Test {
         // self transfer (since only owner has account)
         bank.transferToUsers(Emmanuel, 0.5 ether);
 
-        (, uint bal, , ) = bank.accounts(Emmanuel);
+        (, uint256 bal,,) = bank.accounts(Emmanuel);
         assertEq(bal, 1 ether);
     }
 
@@ -103,7 +101,7 @@ contract TestTechCrushBank is Test {
 
         bank.closeAccount();
 
-        (, uint bal, , bool active) = bank.accounts(Emmanuel);
+        (, uint256 bal,, bool active) = bank.accounts(Emmanuel);
 
         assertEq(bal, 0);
         assertFalse(active);
